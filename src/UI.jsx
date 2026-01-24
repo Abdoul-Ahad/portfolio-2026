@@ -2077,10 +2077,8 @@ export const AboutPage = memo(({ setView }) => {
   }, [setView]);
 
   return (
-    // CORRECTION ICI : Remplacement de 'bg-black' par 'bg-transparent'
     <div className="w-full min-h-screen overflow-x-hidden bg-transparent relative z-20">
       
-      {/* --- INTEGRATION SEO --- */}
       <SEO 
         title="À Propos" 
         description="Découvrez mon parcours et ma vision. Étudiant en BUT MMI spécialisé en création numérique, je transforme vos concepts en expériences visuelles." 
@@ -2098,6 +2096,8 @@ export const AboutPage = memo(({ setView }) => {
             transition={{ duration: 0.8 }} 
             className="w-full text-center flex justify-center"
           >
+            {/* AJOUT H1 INVISIBLE POUR SEO */}
+            <h1 className="sr-only">À PROPOS DE MOI</h1>
             <FuzzyText fontSize={titleFontSize} fontWeight={900} color="#ffffff">
               À PROPOS
             </FuzzyText>
@@ -2245,7 +2245,6 @@ export const AboutPage = memo(({ setView }) => {
 
 
 export const ProjectsPage = memo(({ onProjectClick }) => {
-    // Gestion de la taille du titre selon l'écran
     const [titleFontSize, setTitleFontSize] = useState(() => typeof window !== 'undefined' && window.innerWidth < 768 ? 100 : 250);
     
     useEffect(() => {
@@ -2266,7 +2265,6 @@ export const ProjectsPage = memo(({ onProjectClick }) => {
     return (
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="w-full min-h-screen" style={{ opacity: 0 }}> 
             
-            {/* --- INTEGRATION SEO --- */}
             <SEO 
                 title="Mes Projets" 
                 description="Explorez le portfolio de Abdoul-Ahad REHMAN. Une sélection de projets en Web Design, Motion Design, Branding et Développement." 
@@ -2275,6 +2273,8 @@ export const ProjectsPage = memo(({ onProjectClick }) => {
             {/* --- HEADER --- */}
             <section className="h-screen w-full flex flex-col items-center justify-center relative px-4 overflow-hidden pt-32 pb-32">
                 <motion.div initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1.5 }} className="w-full max-w-[90vw] md:max-w-7xl relative z-10 text-center">
+                    {/* AJOUT H1 INVISIBLE POUR SEO */}
+                    <h1 className="sr-only">MES PROJETS</h1>
                     <FuzzyText fontSize={titleFontSize} fontWeight={900} color="#ffffff">PROJETS</FuzzyText>
                 </motion.div>
                 <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1 }} className="mt-8 flex flex-col items-center gap-4 text-center w-full z-10">
@@ -2316,7 +2316,6 @@ export const ProjectsPage = memo(({ onProjectClick }) => {
                                 exit={{ opacity: 0, scale: 0.9 }} 
                                 transition={{ duration: 0.4 }}
                             >
-                                {/* IMPORTANT : On appelle directement onProjectClick fourni par App.jsx */}
                                 <ProjectCard 
                                     {...p} 
                                     index={0} 
@@ -2355,10 +2354,8 @@ export const HomePage = memo(({ setView, onProjectClick }) => {
       animate={{ opacity: 1 }} 
       exit={{ opacity: 0 }} 
       transition={{ duration: 0.5 }} 
-      // Important : bg-transparent pour laisser voir votre nouveau fond
       className="relative z-10 flex flex-col items-center w-full min-h-screen bg-transparent"
     >
-      {/* --- INTEGRATION SEO --- */}
       <SEO 
         title="Accueil" 
         description="Bienvenue sur le portfolio d'Abdoul-Ahad REHMAN. Expert en Web Design, Motion Design et Développement Front-End." 
@@ -2369,13 +2366,12 @@ export const HomePage = memo(({ setView, onProjectClick }) => {
         id="home" 
         className="min-h-screen w-full flex flex-col justify-center relative px-6 md:px-12 lg:px-20 pt-20 md:pt-0 overflow-hidden"
       >
-        
         <div className="w-full max-w-[1600px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-0 lg:gap-16 items-center relative z-10 h-full">
             
             <div className="flex flex-col justify-center text-center lg:text-left space-y-8 md:space-y-12 w-full py-12 lg:py-0 order-2 lg:order-1">
             
-            {/* TITRE PRINCIPAL */}
-            <div className="flex flex-col select-none leading-none relative">
+            {/* TITRE PRINCIPAL (MODIFIÉ EN H1 POUR SEO) */}
+            <h1 className="flex flex-col select-none leading-none relative">
               <div className="relative z-20 mt-2 flex flex-col md:flex-row flex-wrap items-center lg:items-baseline justify-center lg:justify-start gap-y-1 md:gap-x-3">
                 <motion.span 
                   initial={{ opacity: 0, y: 30 }} 
@@ -2402,7 +2398,7 @@ export const HomePage = memo(({ setView, onProjectClick }) => {
                   ABDOUL REHMAN
                 </motion.span>
               </div>
-            </div>
+            </h1>
 
             {/* DESCRIPTION & ROLES */}
             <div className="relative space-y-6 md:space-y-10 px-0 md:px-0"> 
@@ -2461,7 +2457,6 @@ export const HomePage = memo(({ setView, onProjectClick }) => {
             </div>
           </div>
 
-          {/* COLONNE VISUELLE (3D DESKTOP UNIQUEMENT) */}
           <div className="hidden lg:block relative h-[700px] lg:h-[85vh] min-h-[600px] order-1 lg:order-2">
             {isDesktop && (
               <motion.div 
@@ -2483,7 +2478,6 @@ export const HomePage = memo(({ setView, onProjectClick }) => {
           </div>
         </div>
             
-        {/* SCROLL DOWN INDICATOR (Desktop uniquement) */}
         <motion.div 
           className="hidden md:flex absolute bottom-12 left-1/2 -translate-x-1/2 flex-col items-center gap-2 z-20 opacity-30 mix-blend-difference pointer-events-none" 
           animate={{ y: [0, 8, 0] }} 
