@@ -1,0 +1,144 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: #000000;
+  color: white;
+  cursor: none; /* C'est pour ton curseur custom */
+}
+
+/* --- AJOUTS CYBERPUNK --- */
+
+/* Fond Grille animé */
+.bg-tech-grid {
+  background-size: 50px 50px;
+  background-image: linear-gradient(to right, rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+  mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+}
+
+/* Effet Glassmorphism Néon pour le texte rotatif */
+.glass-neon-box {
+  background: rgba(0, 240, 255, 0.05); /* Fond très léger */
+  backdrop-filter: blur(5px);          /* Flou derrière */
+  border: 1px solid rgba(0, 240, 255, 0.3); /* Bordure fine */
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.1); /* Lueur externe */
+}
+
+/* Petites croix de décoration */
+.tech-cross {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  opacity: 0.5;
+}
+.tech-cross::before, .tech-cross::after {
+  content: '';
+  position: absolute;
+  background: #00F0FF;
+}
+.tech-cross::before { width: 100%; height: 1px; top: 50%; left: 0; }
+.tech-cross::after { width: 1px; height: 100%; left: 50%; top: 0; }
+
+/* --- DÉGRADÉ TEXTE CYBERPUNK --- */
+.neon-gradient-text {
+  /* Dégradé enrichi : Cyan -> Bleu -> Violet -> Rouge */
+  background: linear-gradient(to right, #00F0FF 0%, #FF003C 100%);
+  
+  /* CORRECTION ICI : On passe de 200% à 100% pour voir le rouge à la fin */
+  background-size: 100% auto;
+  
+  /* Technique pour coller le dégradé sur le texte */
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  
+  display: inline-block;
+}
+
+/* Tes styles personnalisés */
+.text-shadow-neon { text-shadow: 0 0 5px rgba(255, 255, 255, 0.8), 0 0 10px rgba(0, 240, 255, 0.5); }
+@keyframes scan { 0% { top: 0; opacity: 0; } 50% { opacity: 1; } 100% { top: 100%; opacity: 0; } }
+.animate-scan { animation: scan 3s cubic-bezier(0.4, 0, 0.2, 1) infinite; }
+@keyframes noise { 0% { transform: translate(0, 0); } 10% { transform: translate(-5%, -10%); } 20% { transform: translate(-15%, 5%); } 30% { transform: translate(7%, -2%); } 40% { transform: translate(-10%, 15%); } 50% { transform: translate(12%, -8%); } 60% { transform: translate(-10%, -10%); } 70% { transform: translate(5%, 8%); } 80% { transform: translate(-15%, -5%); } 90% { transform: translate(10%, 10%); } }
+.animate-noise { animation: noise 3s linear infinite alternate; }
+.perspective-1000 { perspective: 1000px; transform-style: preserve-3d; }
+@keyframes flicker { 0% { opacity: 0.1; } 5% { opacity: 0.7; } 10% { opacity: 0.3; } 15% { opacity: 0.8; } 20% { opacity: 0.2; } 100% { opacity: 1; } }
+.animate-flicker { animation: flicker 2s infinite linear alternate; }
+.animate-spin-slow { animation: spin 10s linear infinite; }
+@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+.custom-scrollbar::-webkit-scrollbar { width: 6px; }
+.custom-scrollbar::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.05); }
+.custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(0, 240, 255, 0.3); border-radius: 3px; }
+.custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(0, 240, 255, 0.6); }
+@media (pointer: fine) { * { cursor: none !important; } }
+@media (pointer: coarse) { * { cursor: auto !important; } }
+.min-h-screen { min-height: 100vh; min-height: 100dvh; }
+button, a { touch-action: manipulation; }
+
+.custom-background {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #050505; /* Fond presque noir */
+  
+  /* Superposition des couches : Vignette > Grille Cyan > Grille Magenta */
+  background-image: 
+    /* 1. La Vignette (Ombre sur les bords) */
+    radial-gradient(circle at center, transparent 30%, #000 90%),
+    
+    /* 2. GRILLE PRINCIPALE (Cyan - Grande) */
+    linear-gradient(rgba(3, 233, 244, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(3, 233, 244, 0.1) 1px, transparent 1px),
+    
+    /* 3. GRILLE SECONDAIRE (Magenta - Petite) */
+    linear-gradient(rgba(217, 3, 244, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(217, 3, 244, 0.05) 1px, transparent 1px);
+
+  /* Tailles des grilles */
+  background-size:
+    100% 100%,      /* Vignette */
+    60px 60px,      /* Cyan V */
+    60px 60px,      /* Cyan H */
+    20px 20px,      /* Magenta V */
+    20px 20px;      /* Magenta H */
+
+  /* Fixe le background pour qu'il ne bouge pas quand on scroll la page, 
+     mais l'animation continue de le faire glisser */
+  background-attachment: fixed;
+  
+  animation: cyber-move 10s linear infinite;
+}
+
+/* Animation de défilement infini */
+@keyframes cyber-move {
+  0% {
+    background-position:
+      0 0,          /* Vignette fixe */
+      0 0,          /* Cyan V */
+      0 0,          /* Cyan H */
+      0 0,          /* Magenta V */
+      0 0;          /* Magenta H */
+  }
+  100% {
+    background-position:
+      0 0,          /* Vignette fixe */
+      60px 60px,    /* Cyan bouge d'un carreau complet */
+      60px 60px,
+      40px 40px,    /* Magenta bouge différemment (effet parallaxe) */
+      40px 40px;
+  }
+}
