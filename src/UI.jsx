@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, memo, useCallback, useMemo, Suspense } from 'react';
+import emailjs from '@emailjs/browser';
 import { SEO } from './SEO';
 import { createPortal } from 'react-dom';
 import { motion, useScroll, useSpring, AnimatePresence, useMotionValue, useTransform, useInView } from 'framer-motion';
@@ -1104,6 +1105,7 @@ export const FooterContact = memo(({ setView }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
+    // 1. Validation des champs
     if (!formData.name || !formData.email || !formData.message) { 
       setErrorMessage("Veuillez remplir tous les champs."); 
       setStatus('error'); 
@@ -1119,12 +1121,32 @@ export const FooterContact = memo(({ setView }) => {
     setStatus('sending');
     setErrorMessage('');
     
-    // Simulation d'envoi
-    setTimeout(() => { 
-      setStatus('success'); 
-      setFormData({ name: '', email: '', message: '' }); 
-      setTimeout(() => setStatus('idle'), 5000); 
-    }, 1000);
+    // 2. Préparation des données pour EmailJS
+    const templateParams = {
+        name: formData.name,
+        email: formData.email,
+        message: formData.message,
+    };
+
+    // 3. Envoi via EmailJS avec tes identifiants
+    try {
+        await emailjs.send(
+            'service_rh0fjyq',      // Ton Service ID
+            'template_kzr9uos',     // Ton Template ID
+            templateParams,
+            '-52r4hC0Q3z16hUl-'     // Ta Public Key
+        );
+
+        // Succès
+        setStatus('success'); 
+        setFormData({ name: '', email: '', message: '' }); 
+        setTimeout(() => setStatus('idle'), 5000); 
+
+    } catch (error) {
+        console.error("Erreur EmailJS:", error);
+        setErrorMessage("Une erreur est survenue lors de l'envoi.");
+        setStatus('error');
+    }
   };
 
   return (
