@@ -1050,34 +1050,42 @@ const RecruitmentBanner = memo(({ setView }) => {
   );
 });
 
+
 /* =========================================
-   COMPOSANT CHAMP DE CONTACT (Sorti pour éviter le bug de focus)
+   COMPOSANT CHAMP DE CONTACT CORRIGÉ
    ========================================= */
-const ContactField = memo(({ label, name, type = "text", placeholder, value, onChange }) => {
+const ContactField = memo(({ label, name, type = "text", placeholder, value, onChange, autoComplete }) => {
   const [focused, setFocused] = useState(false);
   
   return (
     <div className="relative group mb-6 w-full">
-      <label className={`block font-mono text-xs tracking-widest uppercase mb-2 transition-colors duration-300 ${focused ? 'text-[#00F0FF]' : 'text-neutral-500'}`}>
+      <label 
+        htmlFor={name} // CORRECTION : Lie le label à l'input via l'ID
+        className={`block font-mono text-xs tracking-widest uppercase mb-2 transition-colors duration-300 ${focused ? 'text-[#00F0FF]' : 'text-neutral-500'}`}
+      >
         {label}
       </label>
       {type === 'textarea' ? ( 
         <textarea 
+          id={name} // CORRECTION : ID requis pour l'accessibilité
           name={name} 
           value={value} 
           onChange={onChange} 
           placeholder={placeholder} 
+          autoComplete={autoComplete} // CORRECTION : Gère l'autocomplétion
           onFocus={() => setFocused(true)} 
           onBlur={() => setFocused(false)} 
           className="w-full bg-neutral-900/50 border border-white/10 p-4 text-white text-sm font-light focus:outline-none focus:border-[#00F0FF] transition-all duration-300 resize-none h-32 rounded-lg" 
         /> 
       ) : ( 
         <input 
+          id={name} // CORRECTION : ID requis pour l'accessibilité
           type={type} 
           name={name} 
           value={value} 
           onChange={onChange} 
           placeholder={placeholder} 
+          autoComplete={autoComplete} // CORRECTION : Gère l'autocomplétion
           onFocus={() => setFocused(true)} 
           onBlur={() => setFocused(false)} 
           className="w-full bg-neutral-900/50 border border-white/10 p-4 text-white text-sm font-light focus:outline-none focus:border-[#00F0FF] transition-all duration-300 rounded-lg" 
@@ -1086,6 +1094,7 @@ const ContactField = memo(({ label, name, type = "text", placeholder, value, onC
     </div>
   );
 });
+
 
 /* =========================================
    FOOTER CONTACT CORRIGÉ
@@ -1128,7 +1137,7 @@ export const FooterContact = memo(({ setView }) => {
         message: formData.message,
     };
 
-    // 3. Envoi via EmailJS avec tes identifiants
+    // 3. Envoi via EmailJS
     try {
         await emailjs.send(
             'service_rh0fjyq',      // Ton Service ID
@@ -1165,6 +1174,7 @@ export const FooterContact = memo(({ setView }) => {
               placeholder="Votre nom" 
               value={formData.name} 
               onChange={handleChange} 
+              autoComplete="name" // AJOUTÉ
             />
             <ContactField 
               label="Email" 
@@ -1173,6 +1183,7 @@ export const FooterContact = memo(({ setView }) => {
               placeholder="votre@email.com" 
               value={formData.email} 
               onChange={handleChange} 
+              autoComplete="email" // AJOUTÉ
             />
           </div>
           
@@ -1183,6 +1194,7 @@ export const FooterContact = memo(({ setView }) => {
             placeholder="Parlez-moi de votre projet..." 
             value={formData.message} 
             onChange={handleChange} 
+            autoComplete="off" // AJOUTÉ
           />
           
           <div className="flex flex-col items-center mt-8 gap-4">
@@ -1827,16 +1839,35 @@ const SkillTags = memo(({ title, data, color }) => {
             whileInView={{ opacity: 1, y: 0 }} 
             viewport={{ once: true }} 
             transition={{ delay: index * 0.05 }} 
-            className="relative group/tag cursor-default"
+            className="relative cursor-default"
           >
             <div 
-              className="relative px-4 py-2.5 bg-[#050505] border border-white/10 rounded overflow-hidden transition-all duration-300 group-hover/tag:border-[color:var(--tag-color)] group-hover/tag:translate-y-[-2px] group-hover/tag:shadow-[0_4px_20px_-10px_var(--tag-color)]" 
-              style={{ '--tag-color': color }}
+              className="relative px-4 py-2.5 bg-[#050505] border rounded overflow-hidden transition-all duration-300 group/tag hover:translate-y-[-2px]" 
+              style={{ 
+                borderColor: `${color}40`, // Bordure semi-transparente colorée
+                boxShadow: `0 0 15px -5px ${color}20`, // Petite lueur permanente
+                '--tag-color': color 
+              }}
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-[var(--tag-color)]/0 via-[var(--tag-color)]/10 to-[var(--tag-color)]/0 translate-x-[-100%] group-hover/tag:translate-x-[100%] transition-transform duration-700 ease-in-out" />
-              <div className="flex items-center gap-3">
-                <div className="w-1.5 h-1.5 rounded-full bg-neutral-800 group-hover/tag:bg-[var(--tag-color)] group-hover/tag:shadow-[0_0_8px_var(--tag-color)] transition-all duration-300" />
-                <span className="font-mono text-xs font-bold text-neutral-400 group-hover/tag:text-white transition-colors tracking-wider uppercase">
+              {/* Animation de balayage continue (Reflet) */}
+              <motion.div 
+                className="absolute inset-0 bg-gradient-to-r from-transparent via-[var(--tag-color)]/10 to-transparent"
+                animate={{ x: ['-100%', '200%'] }}
+                transition={{ 
+                  duration: 3, 
+                  repeat: Infinity, 
+                  ease: "linear", 
+                  delay: index * 0.2, // Décalage pour effet de vague
+                  repeatDelay: 2
+                }}
+              />
+              
+              <div className="flex items-center gap-3 relative z-10">
+                <div 
+                    className="w-1.5 h-1.5 rounded-full shadow-[0_0_8px_var(--tag-color)]" 
+                    style={{ backgroundColor: color }} 
+                />
+                <span className="font-mono text-xs font-bold text-white tracking-wider uppercase text-shadow-sm">
                   {item.label}
                 </span>
               </div>
