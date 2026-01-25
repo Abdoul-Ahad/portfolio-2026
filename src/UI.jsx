@@ -40,7 +40,7 @@ const CanvasLoader = () => {
 };
 
 const Laptop = () => {
-  const computer = useGLTF("/Laptop_pc/scene.gltf");
+  const computer = useGLTF("/Laptop_pc/scene.glb");
 
   return (
     <mesh>
@@ -65,13 +65,24 @@ const Laptop = () => {
 };
 
 const LaptopCanvas = () => {
+  // OPTIMISATION : Ne charger le canvas que si visible ou nécessaire
+  const [isMounted, setIsMounted] = useState(false);
+  
+  useEffect(() => {
+    // Petit délai pour laisser le thread principal respirer au chargement de la page
+    const timer = setTimeout(() => setIsMounted(true), 100);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (!isMounted) return <div className="w-full h-[600px] lg:h-[85vh] min-h-[600px]" />;
+
   return (
     <div className="w-full h-[600px] lg:h-[85vh] min-h-[600px] cursor-grab active:cursor-grabbing relative z-10">
       <Canvas
-        shadows
-        dpr={[1, 2]}
+        shadows={false} // OPTIMISATION : Désactiver ombres complexes pour la perf
+        dpr={[1, 1.5]} // OPTIMISATION : Limiter la résolution max à 1.5 (suffisant et plus léger)
         camera={{ position: [10, 3, 5], fov: 25, near: 0.1, far: 200 }}
-        gl={{ preserveDrawingBuffer: true, alpha: true }}
+        gl={{ preserveDrawingBuffer: true, alpha: true, powerPreference: "high-performance" }}
       >
         <Suspense fallback={<CanvasLoader />}>
           <OrbitControls
@@ -339,10 +350,12 @@ export const InteractiveGridBackground = memo(() => {
       
       {!isTouch && (
         <>
+          {/* OPTIMISATION MAJEURE : Remplacement du filtre SVG lourd par du bruit CSS pur */}
           <div 
-            className="absolute inset-0 opacity-[0.03] pointer-events-none mix-blend-overlay animate-noise" 
+            className="absolute inset-0 opacity-[0.05] pointer-events-none mix-blend-overlay"
             style={{ 
-              background: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` 
+                backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.5'/%3E%3C/svg%3E")`,
+                filter: 'contrast(120%) brightness(120%)'
             }} 
           />
           <motion.div 
