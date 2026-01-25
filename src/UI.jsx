@@ -1878,6 +1878,9 @@ const SkillTags = memo(({ title, data, color }) => {
 
 
 const TechArsenal = memo(({ items }) => {
+  // AJOUT : On récupère l'info si on est sur mobile
+  const isTouch = useIsTouchDevice();
+
   const getLevelLabel = useCallback((val) => {
     if (val >= 90) return { label: "EXPERT", color: "#FF003C" };
     if (val >= 75) return { label: "CONFIRMÉ", color: "#00F0FF" };
@@ -1921,10 +1924,14 @@ const TechArsenal = memo(({ items }) => {
           return (
             <motion.div 
               key={index} 
-              initial={{ opacity: 0, scale: 0.9 }} 
+              // MODIFICATION ICI : Condition sur l'animation initiale
+              // Sur mobile (isTouch) : opacity 1 et scale 1 dès le début (pas d'anim)
+              // Sur PC (!isTouch) : opacity 0 et scale 0.9 (anim normale)
+              initial={isTouch ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }} 
               whileInView={{ opacity: 1, scale: 1 }} 
               viewport={{ once: true }} 
-              transition={{ delay: index * 0.05 }} 
+              // MODIFICATION ICI : Pas de délai sur mobile
+              transition={{ delay: isTouch ? 0 : index * 0.05 }} 
               className="group relative bg-neutral-900/40 border border-white/5 md:hover:border-[#00F0FF]/50 rounded-xl p-4 flex flex-col items-center justify-center gap-4 transition-all duration-300 md:hover:bg-neutral-800/60 aspect-square"
             >
               <div className="w-12 h-12 text-neutral-400 md:group-hover:text-white transition-colors duration-300 md:group-hover:scale-110 transform flex items-center justify-center">
