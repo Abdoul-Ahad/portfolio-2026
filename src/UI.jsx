@@ -50,8 +50,6 @@ const Laptop = () => {
         angle={0.12}
         penumbra={1}
         intensity={2}
-        castShadow
-        shadow-mapSize={1024}
       />
       <pointLight intensity={1} position={[10, 10, 10]} />
       <primitive
@@ -376,7 +374,7 @@ export const CustomCursor = () => {
   const cursorDotsRef = useRef([]);
   const mousePosition = useRef({ x: -100, y: -100, hovering: false });
   const dotsPosition = useRef([]);
-  const DOT_COUNT = 30;
+  const DOT_COUNT = 15;
   const isIdle = useRef(false);
   const idleTimer = useRef(null);
 
@@ -676,22 +674,17 @@ const TechGrid = memo(({ items }) => {
 
 const ProjectCard = memo(({ title, category, context, index, isCarousel, onClick, image }) => (
   <motion.div 
-    // OPTIMISATION : Animation plus simple et purement GPU (opacity + translate)
     initial={!isCarousel ? { opacity: 0, y: 50 } : {}} 
     whileInView={!isCarousel ? { opacity: 1, y: 0 } : {}} 
-    // OPTIMISATION : On déclenche l'anim un peu plus tôt (margin -50px) pour éviter le pop soudain
     viewport={{ once: true, margin: "-50px" }} 
-    transition={{ duration: 0.5, ease: "easeOut", delay: index * 0.05 }} // Délai réduit pour réactivité
-    
-    // OPTIMISATION : transform-gpu force le navigateur à utiliser la carte graphique
-    className={`group relative bg-neutral-900 overflow-hidden cursor-none interactive rounded-xl border border-white/10 transform-gpu ${
+    transition={{ duration: 0.5, ease: "easeOut", delay: index * 0.05 }}
+    whileHover={{ scale: 1.02 }}
+    className={`group relative bg-neutral-900 overflow-hidden cursor-pointer interactive rounded-xl border border-white/10 transform-gpu ${
       isCarousel 
         ? 'w-[300px] md:w-[450px] lg:w-[600px] h-[200px] md:h-[280px] lg:h-[350px] flex-shrink-0' 
         : 'w-full aspect-[16/9]'
-    } ${onClick ? 'cursor-pointer' : ''}`} 
-    
-    // On retire 'layout="position"' qui causait le lag
-    onClick={() => onClick && onClick({ title, category, context, image, gallery: ALL_PROJECTS[index]?.gallery })}
+    }`} 
+    onClick={() => onClick && onClick({ title, category, context, image })}
   >
     {/* Image de fond */}
     <div className="absolute inset-0 w-full h-full">
@@ -702,20 +695,20 @@ const ProjectCard = memo(({ title, category, context, index, isCarousel, onClick
       />
     </div>
 
-    {/* Overlay couleur au survol */}
+    {/* Overlay couleur au survol - Desktop uniquement */}
     <div className="absolute inset-0 bg-[#00F0FF]/10 opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 mix-blend-overlay pointer-events-none" />
     
     {/* BADGE CONTEXTE */}
     {context && (
-        <div className="absolute top-4 left-4 z-20 pointer-events-none">
-            <span className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest border shadow-lg ${
-                context.includes('Universitaire') 
-                ? 'bg-purple-900/80 border-purple-500/50 text-purple-200' 
-                : 'bg-green-900/80 border-green-500/50 text-green-200'
-            }`}>
-                {context}
-            </span>
-        </div>
+      <div className="absolute top-4 left-4 z-20 pointer-events-none">
+        <span className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest border shadow-lg backdrop-blur-sm ${
+          context.includes('Universitaire') 
+            ? 'bg-purple-900/80 border-purple-500/50 text-purple-200' 
+            : 'bg-green-900/80 border-green-500/50 text-green-200'
+        }`}>
+          {context}
+        </span>
+      </div>
     )}
 
     {/* Contenu Texte */}
@@ -727,7 +720,6 @@ const ProjectCard = memo(({ title, category, context, index, isCarousel, onClick
         <h3 className="text-2xl md:text-3xl font-bold text-white translate-y-0 md:translate-y-4 md:group-hover:translate-y-0 transition-transform duration-500 ease-[0.22,1,0.36,1]">
           {title}
         </h3>
-        {/* On retire le backdrop-blur ici car c'est très lourd à animer */}
         <div className="bg-white/10 p-3 rounded-full opacity-0 md:group-hover:opacity-100 transition-all duration-500 md:group-hover:translate-x-1 md:group-hover:-translate-y-1 border border-white/10">
           <ArrowUpRight size={20} className="text-white" />
         </div>
