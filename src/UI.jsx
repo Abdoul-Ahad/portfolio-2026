@@ -296,20 +296,12 @@ export const InteractiveGridBackground = memo(() => {
         timer = null;
       }, 100);
     };
-    
     window.addEventListener('resize', updateViewport, { passive: true });
-    window.addEventListener('orientationchange', updateViewport, { passive: true });
-    updateViewport();
-    
-    return () => {
-      window.removeEventListener('resize', updateViewport);
-      window.removeEventListener('orientationchange', updateViewport);
-    };
+    return () => { window.removeEventListener('resize', updateViewport); };
   }, []);
 
   useEffect(() => {
     if (isTouch) return;
-    
     let rafId = null;
     const handleMouseMove = (e) => {
       if (rafId) return;
@@ -319,13 +311,8 @@ export const InteractiveGridBackground = memo(() => {
         rafId = null;
       });
     };
-    
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
-    
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      if (rafId) cancelAnimationFrame(rafId);
-    };
+    return () => { window.removeEventListener('mousemove', handleMouseMove); if (rafId) cancelAnimationFrame(rafId); };
   }, [mouseX, mouseY, isTouch]);
 
   const rotateX = useTransform(mouseY, [0, viewportSize.height], [0.5, -0.5]);
@@ -350,7 +337,7 @@ export const InteractiveGridBackground = memo(() => {
       
       {!isTouch && (
         <>
-          {/* OPTIMISATION MAJEURE : Remplacement du filtre SVG lourd par du bruit CSS pur */}
+          {/* OPTIMISATION : Image statique en base64 au lieu du filtre SVG calculé en temps réel */}
           <div 
             className="absolute inset-0 opacity-[0.05] pointer-events-none mix-blend-overlay"
             style={{ 
@@ -2621,13 +2608,13 @@ export const LoadingScreen = memo(({ onComplete }) => {
   const isTouch = useIsTouchDevice();
 
   useEffect(() => {
-    // CONFIGURATION DE LA DURÉE
-    // Mobile : 4000ms (4s) -> Plus rapide
-    // PC : 6000ms (6s) -> Durée standard pour la spirale
-    const duration = isTouch ? 4000 : 6000; 
+    // --- OPTIMISATION PERFORMANCE ---
+    // On réduit drastiquement le temps d'attente sur mobile pour améliorer le LCP/FCP
+    // Mobile : 1500ms (1.5s) au lieu de 4000ms -> Le score va passer au vert
+    // PC : 4500ms (4.5s) pour garder l'effet visuel
+    const duration = isTouch ? 1500 : 4500; 
     
     const intervalTime = 50; 
-    // Calcul de l'incrément basé sur la durée choisie
     const increment = 100 / (duration / intervalTime);
 
     const timer = setInterval(() => {
@@ -2687,7 +2674,6 @@ export const LoadingScreen = memo(({ onComplete }) => {
               }
             `}
           </style>
-          {/* CORRECTION : aria-hidden="true" cache les particules aux outils d'accessibilité */}
           <div className="particle-container mb-12" aria-hidden="true">
             {particles.map((i) => (
               <div key={i} className="particle" style={{ '--i': i }} />
@@ -2711,7 +2697,6 @@ export const LoadingScreen = memo(({ onComplete }) => {
       {/* --- BARRE DE PROGRESSION --- */}
       <div className="flex flex-col items-center gap-2 w-64 md:w-80 relative z-50">
         <div className="w-full flex justify-between items-end text-[#00F0FF] font-mono text-xs uppercase tracking-widest font-bold">
-            {/* Texte différent selon le device */}
             <span>{isTouch ? "Mobile_System" : "System_Init"}</span>
             <span>{Math.round(progress)}%</span>
         </div>
