@@ -597,6 +597,7 @@ export const Navbar = memo(({ currentView, setView, activeSection }) => {
       {/* Mobile Home Button */}
       <div className="md:hidden fixed top-6 left-6 z-[60]">
         <button 
+          aria-label="Retour à l'accueil" // <-- AJOUT ICI
           onClick={() => { setIsMobileMenuOpen(false); setView('home'); window.scrollTo(0, 0); }} 
           className={`p-3 border rounded-full backdrop-blur-md shadow-[0_0_15px_rgba(0,0,0,0.5)] transition-all duration-300 ${currentView === 'home' ? 'bg-black border-[#00F0FF] text-[#00F0FF]' : 'bg-black/80 border-white/10 text-neutral-400'}`}
         >
@@ -607,6 +608,7 @@ export const Navbar = memo(({ currentView, setView, activeSection }) => {
       {/* Mobile Menu Button */}
       <div className="md:hidden fixed top-6 right-6 z-[60]">
         <button 
+          aria-label="Ouvrir le menu" // <-- AJOUT ICI
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} 
           className={`p-3 border rounded-full backdrop-blur-md shadow-[0_0_15px_rgba(0,0,0,0.5)] transition-all duration-300 ${isMobileMenuOpen ? 'bg-black border-[#FF003C] text-[#FF003C]' : 'bg-black/80 border-white/10 text-[#00F0FF]'}`}
         >
@@ -1073,32 +1075,33 @@ const ContactField = memo(({ label, name, type = "text", placeholder, value, onC
   return (
     <div className="relative group mb-6 w-full">
       <label 
-        htmlFor={name} // CORRECTION : Lie le label à l'input via l'ID
-        className={`block font-mono text-xs tracking-widest uppercase mb-2 transition-colors duration-300 ${focused ? 'text-[#00F0FF]' : 'text-neutral-500'}`}
+        htmlFor={name}
+        // CORRECTION : text-neutral-400 (plus clair) au lieu de 500
+        className={`block font-mono text-xs tracking-widest uppercase mb-2 transition-colors duration-300 ${focused ? 'text-[#00F0FF]' : 'text-neutral-400'}`}
       >
         {label}
       </label>
       {type === 'textarea' ? ( 
         <textarea 
-          id={name} // CORRECTION : ID requis pour l'accessibilité
+          id={name}
           name={name} 
           value={value} 
           onChange={onChange} 
           placeholder={placeholder} 
-          autoComplete={autoComplete} // CORRECTION : Gère l'autocomplétion
+          autoComplete={autoComplete}
           onFocus={() => setFocused(true)} 
           onBlur={() => setFocused(false)} 
           className="w-full bg-neutral-900/50 border border-white/10 p-4 text-white text-sm font-light focus:outline-none focus:border-[#00F0FF] transition-all duration-300 resize-none h-32 rounded-lg" 
         /> 
       ) : ( 
         <input 
-          id={name} // CORRECTION : ID requis pour l'accessibilité
+          id={name}
           type={type} 
           name={name} 
           value={value} 
           onChange={onChange} 
           placeholder={placeholder} 
-          autoComplete={autoComplete} // CORRECTION : Gère l'autocomplétion
+          autoComplete={autoComplete}
           onFocus={() => setFocused(true)} 
           onBlur={() => setFocused(false)} 
           className="w-full bg-neutral-900/50 border border-white/10 p-4 text-white text-sm font-light focus:outline-none focus:border-[#00F0FF] transition-all duration-300 rounded-lg" 
@@ -1187,7 +1190,7 @@ export const FooterContact = memo(({ setView }) => {
               placeholder="Votre nom" 
               value={formData.name} 
               onChange={handleChange} 
-              autoComplete="name" // AJOUTÉ
+              autoComplete="name"
             />
             <ContactField 
               label="Email" 
@@ -1196,7 +1199,7 @@ export const FooterContact = memo(({ setView }) => {
               placeholder="votre@email.com" 
               value={formData.email} 
               onChange={handleChange} 
-              autoComplete="email" // AJOUTÉ
+              autoComplete="email"
             />
           </div>
           
@@ -1207,7 +1210,7 @@ export const FooterContact = memo(({ setView }) => {
             placeholder="Parlez-moi de votre projet..." 
             value={formData.message} 
             onChange={handleChange} 
-            autoComplete="off" // AJOUTÉ
+            autoComplete="off"
           />
           
           <div className="flex flex-col items-center mt-8 gap-4">
@@ -1256,7 +1259,8 @@ export const FooterContact = memo(({ setView }) => {
             <div className="p-4 rounded-full border border-white/10 group-hover:border-[#00F0FF] group-hover:bg-[#00F0FF]/10 transition-all duration-300">
               <Mail size={24} className="text-white group-hover:text-[#00F0FF]" />
             </div>
-            <span className="font-mono text-[10px] text-neutral-500 group-hover:text-white transition-colors uppercase tracking-wider">
+            {/* CORRECTION : text-neutral-400 */}
+            <span className="font-mono text-[10px] text-neutral-400 group-hover:text-white transition-colors uppercase tracking-wider">
               EMAIL
             </span>
           </a>
@@ -1270,7 +1274,8 @@ export const FooterContact = memo(({ setView }) => {
             <div className="p-4 rounded-full border border-white/10 group-hover:border-[#00F0FF] group-hover:bg-[#00F0FF]/10 transition-all duration-300">
               <Linkedin size={24} className="text-white group-hover:text-[#00F0FF]" />
             </div>
-            <span className="font-mono text-[10px] text-neutral-500 group-hover:text-white transition-colors uppercase tracking-wider">
+            {/* CORRECTION : text-neutral-400 */}
+            <span className="font-mono text-[10px] text-neutral-400 group-hover:text-white transition-colors uppercase tracking-wider">
               LINKEDIN
             </span>
           </a>
@@ -1835,9 +1840,10 @@ const SkillTags = memo(({ title, data, color }) => {
             className="w-1 h-5 rounded-full shadow-[0_0_10px_currentColor]" 
             style={{ backgroundColor: color, color: color }} 
           />
-          <h4 className="text-xl font-black uppercase tracking-tighter text-white">
+          {/* CORRECTION : H4 -> H3 pour la hiérarchie SEO */}
+          <h3 className="text-xl font-black uppercase tracking-tighter text-white">
             {title}
-          </h4>
+          </h3>
         </div>
         <span className="hidden md:block font-mono text-[9px] text-neutral-600 border border-white/5 px-2 py-1 rounded bg-black/40">
           SYS_ONLINE
@@ -1857,12 +1863,11 @@ const SkillTags = memo(({ title, data, color }) => {
             <div 
               className="relative px-4 py-2.5 bg-[#050505] border rounded overflow-hidden transition-all duration-300 group/tag hover:translate-y-[-2px]" 
               style={{ 
-                borderColor: `${color}40`, // Bordure semi-transparente colorée
-                boxShadow: `0 0 15px -5px ${color}20`, // Petite lueur permanente
+                borderColor: `${color}40`, 
+                boxShadow: `0 0 15px -5px ${color}20`,
                 '--tag-color': color 
               }}
             >
-              {/* Animation de balayage continue (Reflet) */}
               <motion.div 
                 className="absolute inset-0 bg-gradient-to-r from-transparent via-[var(--tag-color)]/10 to-transparent"
                 animate={{ x: ['-100%', '200%'] }}
@@ -1870,7 +1875,7 @@ const SkillTags = memo(({ title, data, color }) => {
                   duration: 3, 
                   repeat: Infinity, 
                   ease: "linear", 
-                  delay: index * 0.2, // Décalage pour effet de vague
+                  delay: index * 0.2,
                   repeatDelay: 2
                 }}
               />
@@ -2682,7 +2687,8 @@ export const LoadingScreen = memo(({ onComplete }) => {
               }
             `}
           </style>
-          <div className="particle-container mb-12">
+          {/* CORRECTION : aria-hidden="true" cache les particules aux outils d'accessibilité */}
+          <div className="particle-container mb-12" aria-hidden="true">
             {particles.map((i) => (
               <div key={i} className="particle" style={{ '--i': i }} />
             ))}
@@ -2704,7 +2710,7 @@ export const LoadingScreen = memo(({ onComplete }) => {
 
       {/* --- BARRE DE PROGRESSION --- */}
       <div className="flex flex-col items-center gap-2 w-64 md:w-80 relative z-50">
-        <div className="w-full flex justify-between items-end text-[#00F0FF] font-mono text-xs uppercase tracking-widest">
+        <div className="w-full flex justify-between items-end text-[#00F0FF] font-mono text-xs uppercase tracking-widest font-bold">
             {/* Texte différent selon le device */}
             <span>{isTouch ? "Mobile_System" : "System_Init"}</span>
             <span>{Math.round(progress)}%</span>
