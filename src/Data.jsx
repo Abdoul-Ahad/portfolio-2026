@@ -33,7 +33,7 @@ export const ALL_PROJECTS = [
         client: "None",
         year: "2024",
         duration: "5 Jours",
-        description: "ce projet avait pour but la conception intégrale d'une brochure commerciale pour un acteur de la restauration. J'ai choisi de revisiter l'identité du célèbre pionnier du burger parisien, Le Camion Qui Fume, pour proposer un support plus moderne et structuré. La mission consistait à organiser une grande densité d'informations (menu détaillé, tarifs, coordonnées) de manière lisible et attractive, tout en intégrant une dimension éditoriale ludique avec l'ajout d'une recette illustrée.",
+        description: "Ce projet avait pour but la conception intégrale d'une brochure commerciale pour un acteur de la restauration. J'ai choisi de revisiter l'identité du célèbre pionnier du burger parisien, Le Camion Qui Fume, pour proposer un support plus moderne et structuré. La mission consistait à organiser une grande densité d'informations (menu détaillé, tarifs, coordonnées) de manière lisible et attractive, tout en intégrant une dimension éditoriale ludique avec l'ajout d'une recette illustrée.",
         goals: [
         "Mise en page et gestion de la hiérarchie typographique.",
         "Harmonisation de la charte graphique sur un support imprimé.",
@@ -52,10 +52,10 @@ export const ALL_PROJECTS = [
         title: "NIKE AIR MAX CAMPAIGN", 
         category: "DESIGN GRAPHIQUE",
         context: "Projet Personnel",
-        client: "Concept Art",
+        client: "None",
         year: "2024",
         duration: "1 Semaine",
-        description: "Série d'affiches et visuels promotionnels pour la gamme Air Max. Exploration de différents environnements (Espace, Sunset, Water) pour mettre en valeur le produit à travers des compositions dynamiques.",
+        description: "J'ai conçu ce projet personnel autour de l'iconique Nike Air Max Plus pour challenger mes compétences en direction artistique et en photomontage. L'intention était de réaliser une série de visuels promotionnels immersifs où le produit ne se contente pas d'être posé, mais s'intègre harmonieusement à un environnement dicté par son coloris",
         goals: [
         "Perfectionnement des techniques de compositing et de retouche photo.",
         "Création d'univers graphiques et typographiques cohérents",
@@ -78,7 +78,13 @@ export const ALL_PROJECTS = [
         client: "Campagne Sensibilisation",
         year: "2024",
         duration: "1 Semaine",
-        description: "Création d'une affiche impactante sur le thème de l'énergie nucléaire. Utilisation de contrastes forts et de symbolique visuelle pour interpeller le spectateur.",
+        description: "Ce projet universitaire portait sur la création d'une affiche de sensibilisation pour une cause environnementale. J'ai choisi d'aborder la thématique grave de la pollution nucléaire en adoptant une stratégie de communication décalée, visant spécifiquement un public jeune. Le concept repose sur le détournement des codes du Gaming (référence explicite à Nuketown) pour gamifier l'acte citoyen de nettoyage.",
+        goals: [
+        "Conception et réalisation d'illustrations en vectoriel",
+        "Utilisation de références culturelles pour cibler une audience spécifique",
+        "Travail typographique sur l'impact et la lisibilité du slogan",
+        "Création d'une narration visuelle contrastée"
+        ],
         tech: ["Illustrator", "Photoshop"],
         image: "/images/Affiche-nucléaire.webp"
     },

@@ -1677,12 +1677,12 @@ export const ProjectOverlay = memo(({ project, onClose }) => {
                     <h3 className="text-[#00F0FF] font-mono text-xs uppercase tracking-widest mb-4 flex items-center gap-2">
                       <Activity size={16} /> Brief & Contexte
                     </h3>
-                    <p className="text-neutral-300 font-light text-justify leading-relaxed">
+                    {/* MODIF : md:text-lg pour grossir le texte sur PC */}
+                    <p className="text-neutral-300 font-light text-justify leading-relaxed text-sm md:text-lg">
                       {project.description}
                     </p>
 
-                    {/* --- NOUVELLE SECTION OBJECTIFS --- */}
-                    {/* S'affiche uniquement si tu as ajouté 'goals' dans Data.jsx pour ce projet */}
+                    {/* SECTION OBJECTIFS */}
                     {project.goals && project.goals.length > 0 && (
                       <div className="mt-10 pt-8 border-t border-white/5">
                         <h3 className="text-[#FF003C] font-mono text-xs uppercase tracking-widest mb-6 flex items-center gap-2">
@@ -1696,7 +1696,8 @@ export const ProjectOverlay = memo(({ project, onClose }) => {
                           {project.goals.map((goal, i) => (
                             <li key={i} className="flex items-start gap-3 bg-white/5 border border-white/5 p-3 rounded-lg hover:border-[#FF003C]/30 transition-colors duration-300">
                               <div className="mt-1.5 w-1.5 h-1.5 bg-[#FF003C] rounded-sm shrink-0 shadow-[0_0_5px_#FF003C]" />
-                              <span className="text-neutral-200 text-sm font-light leading-relaxed">
+                              {/* MODIF : md:text-base pour grossir les objectifs sur PC */}
+                              <span className="text-neutral-200 text-sm md:text-base font-light leading-relaxed">
                                 {goal}
                               </span>
                             </li>
@@ -1707,25 +1708,29 @@ export const ProjectOverlay = memo(({ project, onClose }) => {
                   </div>
                 </div>
 
-                {/* COLONNE DROITE : Fiche Technique (Agrandie) */}
-                {/* Changement ici : lg:w-96 au lieu de lg:w-80 */}
+                {/* COLONNE DROITE : Fiche Technique (Agrandie & Alignée) */}
                 <div className="w-full lg:w-96 shrink-0">
-                  <div className="bg-neutral-900/40 border border-white/5 rounded-xl p-6 md:p-8 sticky top-6 backdrop-blur-sm shadow-2xl">
-                    <h3 className="font-mono text-xs text-neutral-500 uppercase tracking-[0.2em] mb-6 flex items-center gap-2 border-b border-white/10 pb-4">
+                  {/* MODIF : min-h pour combler le vide verticalement */}
+                  <div className="bg-neutral-900/40 border border-white/5 rounded-xl p-6 md:p-8 sticky top-6 backdrop-blur-sm shadow-2xl min-h-[500px] flex flex-col">
+                    <h3 className="font-mono text-xs text-neutral-500 uppercase tracking-[0.2em] mb-8 flex items-center gap-2 border-b border-white/10 pb-4">
                       <Database size={14} /> Fiche Technique
                     </h3>
-                    <div className="space-y-6">
-                      <div className="grid grid-cols-2 gap-4">
+                    
+                    {/* MODIF : space-y-8 pour aérer et allonger la fiche */}
+                    <div className="space-y-8 flex-1">
+                      <div className="grid grid-cols-2 gap-6">
                         <div>
-                            <h4 className="text-white text-sm font-bold mb-1">ANNÉE</h4>
-                            <p className="text-neutral-400 text-sm font-mono bg-black/30 p-2 rounded border border-white/5 inline-block w-full text-center">
+                            {/* MODIF : md:text-base */}
+                            <h4 className="text-white text-sm md:text-base font-bold mb-2">ANNÉE</h4>
+                            {/* MODIF : text-left, pl-4, md:text-base */}
+                            <p className="text-neutral-300 text-sm md:text-base font-mono bg-black/30 p-3 rounded border border-white/5 w-full text-left pl-4">
                                 {project.year}
                             </p>
                         </div>
                         {project.duration && (
                             <div>
-                                <h4 className="text-white text-sm font-bold mb-1">DURÉE</h4>
-                                <p className="text-neutral-400 text-sm font-mono bg-black/30 p-2 rounded border border-white/5 inline-block w-full text-center">
+                                <h4 className="text-white text-sm md:text-base font-bold mb-2">DURÉE</h4>
+                                <p className="text-neutral-300 text-sm md:text-base font-mono bg-black/30 p-3 rounded border border-white/5 w-full text-left pl-4">
                                     {project.duration}
                                 </p>
                             </div>
@@ -1734,31 +1739,31 @@ export const ProjectOverlay = memo(({ project, onClose }) => {
                       
                       {project.client && (
                         <div>
-                           <h4 className="text-white text-sm font-bold mb-1">CLIENT / TYPE</h4>
-                           <p className="text-neutral-400 text-sm font-mono">{project.client}</p>
+                           <h4 className="text-white text-sm md:text-base font-bold mb-2">CLIENT / TYPE</h4>
+                           <p className="text-neutral-300 text-sm md:text-base font-mono">{project.client}</p>
                         </div>
                       )}
 
                       <div>
-                        <h4 className="text-white text-sm font-bold mb-3">STACK TECHNIQUE</h4>
+                        <h4 className="text-white text-sm md:text-base font-bold mb-3">STACK TECHNIQUE</h4>
                         <div className="flex flex-wrap gap-2">
                           {project.tech && project.tech.map((t, i) => (
-                            <span key={i} className="px-3 py-1.5 bg-[#00F0FF]/5 border border-[#00F0FF]/20 rounded text-xs text-[#00F0FF] font-mono cursor-default hover:bg-[#00F0FF]/10 transition-colors">
+                            <span key={i} className="px-3 py-1.5 bg-[#00F0FF]/5 border border-[#00F0FF]/20 rounded text-xs md:text-sm text-[#00F0FF] font-mono cursor-default hover:bg-[#00F0FF]/10 transition-colors">
                               {t}
                             </span>
                           ))}
                         </div>
                       </div>
-                      
-                      <div className="pt-6 border-t border-white/10">
+                    </div>
+
+                    <div className="pt-8 border-t border-white/10 mt-auto">
                         <NeonButton 
                           variant="cyan" 
-                          className="w-full justify-center text-xs" 
+                          className="w-full justify-center text-xs md:text-sm" 
                           onClick={() => setIsZoomed(true)} 
                         >
                           VOIR LE PROJET <ExternalLink size={14} />
                         </NeonButton>
-                      </div>
                     </div>
                   </div>
                 </div>
