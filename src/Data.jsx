@@ -33,7 +33,12 @@ export const ALL_PROJECTS = [
         client: "None",
         year: "2024",
         duration: "5 Jours",
-        description: "Conception et mise en page d'un magazine d'art pour le musée du Louvre. L'objectif était de créer une identité visuelle élégante et moderne tout en respectant les codes classiques de l'institution. Travail sur la grille, la typographie et la hiérarchie visuelle.",
+        description: "ce projet avait pour but la conception intégrale d'une brochure commerciale pour un acteur de la restauration. J'ai choisi de revisiter l'identité du célèbre pionnier du burger parisien, Le Camion Qui Fume, pour proposer un support plus moderne et structuré. La mission consistait à organiser une grande densité d'informations (menu détaillé, tarifs, coordonnées) de manière lisible et attractive, tout en intégrant une dimension éditoriale ludique avec l'ajout d'une recette illustrée.",
+        goals: [
+        "Mise en page et gestion de la hiérarchie typographique.",
+        "Harmonisation de la charte graphique sur un support imprimé.",
+        "Intégration stratégique d'éléments d'appel à l'action (QR Code, Recette).",
+        ],
         tech: ["Affinity", "Indesign"],
         image: "/images/Brochure_1.webp",
         gallery: [
@@ -51,6 +56,12 @@ export const ALL_PROJECTS = [
         year: "2024",
         duration: "1 Semaine",
         description: "Série d'affiches et visuels promotionnels pour la gamme Air Max. Exploration de différents environnements (Espace, Sunset, Water) pour mettre en valeur le produit à travers des compositions dynamiques.",
+        goals: [
+        "Perfectionnement des techniques de compositing et de retouche photo.",
+        "Création d'univers graphiques et typographiques cohérents",
+        "Mise en valeur dynamique du produit",
+        "Harmoniser la typographie et l'image"
+        ],
         tech: ["Photoshop", "Lightroom"],
         image: "/images/air-max-sunset.webp",
         gallery: [
@@ -79,7 +90,13 @@ export const ALL_PROJECTS = [
         client: "None",
         year: "2025",
         duration: "4 Jours",
-        description: "Design d'une affiche promotionnelle pour un modèle de voiture sportive. Travail sur l'éclairage, la composition et l'intégration typographique.",
+        description: "Inscrit dans une série personnelle dédiée à l'esthétique automobile, ce projet vise à explorer et moderniser l'image de marques emblématiques à travers des compositions graphiques fortes. Pour cette affiche consacrée à Subaru, l'intention était de rendre hommage à ses origines japonaises en plongeant le véhicule dans un univers Néo-Tokyo nocturne et pluvieux.",
+        goals: [
+        "Maîtrise du compositing avancé et de la fusion d'images (détourage, incrustation)",
+        "Gestion technique des effets atmosphériques",
+        "Création d'une identité visuelle immersive",
+        "Travail typographique impactant jouant sur la profondeur de champ"
+        ],
         tech: ["Photoshop", "Lightroom"],
         image: "/images/affiche-subaru.webp"
     },

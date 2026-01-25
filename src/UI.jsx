@@ -10,7 +10,7 @@ import {
   Cpu, ChevronLeft, Instagram, Linkedin, Mail, Menu as MenuIcon, X,
   CheckCircle, AlertCircle, Briefcase, Calendar, Layers, Terminal, Activity,
   Sparkles, Bot, Code, Smartphone, Globe, Database, Maximize2, ZoomIn, 
-  Minimize2, ExternalLink, Home, Clock 
+  Minimize2, ExternalLink, Home, Clock, Target // <-- AJOUT ICI
 } from 'lucide-react';
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Preload, useGLTF, Html, useProgress } from "@react-three/drei";
@@ -1538,30 +1538,24 @@ const ZoomModal = memo(({ gallery, initialIndex = 0, onClose }) => {
 
 export const ProjectOverlay = memo(({ project, onClose }) => {
   const [isZoomed, setIsZoomed] = useState(false);
-  // Gestion du slider
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const isTouch = useIsTouchDevice();
   useScrollLock(true);
   
   if (!project) return null;
 
-  // Détermine si on a une galerie ou une seule image
   const images = project.gallery && project.gallery.length > 0 ? project.gallery : [project.image];
   const hasMultipleImages = images.length > 1;
   const currentImage = images[currentImageIndex];
 
-  // Défilement Automatique
   useEffect(() => {
     if (!hasMultipleImages || isZoomed) return;
-
     const timer = setInterval(() => {
       setCurrentImageIndex((prev) => (prev + 1) % images.length);
     }, 3500);
-
     return () => clearInterval(timer);
   }, [hasMultipleImages, images.length, isZoomed]);
 
-  // Navigation Slider
   const nextImage = (e) => {
     e?.stopPropagation();
     setCurrentImageIndex((prev) => (prev + 1) % images.length);
@@ -1574,8 +1568,6 @@ export const ProjectOverlay = memo(({ project, onClose }) => {
 
   return (
     <>
-      {/* --- INTEGRATION SEO DYNAMIQUE --- */}
-      {/* Le titre de la page changera pour devenir le titre du projet ouvert */}
       <SEO 
         title={project.title} 
         description={project.description ? project.description.substring(0, 150) + "..." : "Détails du projet."} 
@@ -1620,8 +1612,6 @@ export const ProjectOverlay = memo(({ project, onClose }) => {
             {/* ZONE IMAGE / SLIDER */}
             <div className="w-full relative group cursor-zoom-in overflow-hidden shrink-0 select-none bg-neutral-900" onClick={() => setIsZoomed(true)}>
               <div className="aspect-video md:aspect-[21/9] w-full flex items-center justify-center relative">
-                
-                {/* Image Courante avec Animation */}
                 <AnimatePresence mode="wait">
                     <motion.div 
                         key={currentImageIndex} 
@@ -1639,36 +1629,23 @@ export const ProjectOverlay = memo(({ project, onClose }) => {
                     </motion.div>
                 </AnimatePresence>
 
-                {/* BOUTONS SLIDER (Seulement si plusieurs images) */}
                 {hasMultipleImages && (
                     <>
-                        <button 
-                            onClick={prevImage}
-                            className="absolute left-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-black/50 border border-white/10 text-white hover:bg-[#00F0FF] hover:text-black transition-all z-30 opacity-0 group-hover:opacity-100 duration-300"
-                        >
+                        <button onClick={prevImage} className="absolute left-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-black/50 border border-white/10 text-white hover:bg-[#00F0FF] hover:text-black transition-all z-30 opacity-0 group-hover:opacity-100 duration-300">
                             <ChevronLeft size={24} />
                         </button>
-                        <button 
-                            onClick={nextImage}
-                            className="absolute right-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-black/50 border border-white/10 text-white hover:bg-[#00F0FF] hover:text-black transition-all z-30 opacity-0 group-hover:opacity-100 duration-300"
-                        >
+                        <button onClick={nextImage} className="absolute right-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-black/50 border border-white/10 text-white hover:bg-[#00F0FF] hover:text-black transition-all z-30 opacity-0 group-hover:opacity-100 duration-300">
                             <ChevronRight size={24} />
                         </button>
-                        
-                        {/* Indicateur de pages (petits points) */}
                         <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-30 px-3 py-1.5 bg-black/40 backdrop-blur rounded-full border border-white/5">
                             {images.map((_, idx) => (
-                                <div 
-                                    key={idx} 
-                                    className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${idx === currentImageIndex ? 'bg-[#00F0FF] scale-125' : 'bg-white/30'}`} 
-                                />
+                                <div key={idx} className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${idx === currentImageIndex ? 'bg-[#00F0FF] scale-125' : 'bg-white/30'}`} />
                             ))}
                         </div>
                     </>
                 )}
 
                 <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent opacity-80 pointer-events-none" />
-                
                 {!isTouch && (
                   <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 scale-50 group-hover:scale-100 transform bg-black/60 backdrop-blur-md p-4 rounded-full border border-white/20 pointer-events-none z-20">
                     <ZoomIn size={32} className="text-white" />
@@ -1680,12 +1657,13 @@ export const ProjectOverlay = memo(({ project, onClose }) => {
             {/* Détails du projet */}
             <div className="p-6 md:p-12 max-w-7xl mx-auto w-full">
               <div className="flex flex-col lg:flex-row gap-12 lg:gap-20">
+                
+                {/* COLONNE GAUCHE : Description & Objectifs */}
                 <div className="lg:flex-1 space-y-10">
                   <h1 className="text-4xl md:text-6xl font-black text-white uppercase leading-[0.9] tracking-tight">
                     {project.title}
                   </h1>
                   
-                  {/* Badge Contexte */}
                   <div className="flex items-center gap-4">
                     <div className="w-24 h-1 bg-gradient-to-r from-[#FF003C] to-[#00F0FF]" />
                     {project.context && (
@@ -1702,30 +1680,70 @@ export const ProjectOverlay = memo(({ project, onClose }) => {
                     <p className="text-neutral-300 font-light text-justify leading-relaxed">
                       {project.description}
                     </p>
+
+                    {/* --- NOUVELLE SECTION OBJECTIFS --- */}
+                    {/* S'affiche uniquement si tu as ajouté 'goals' dans Data.jsx pour ce projet */}
+                    {project.goals && project.goals.length > 0 && (
+                      <div className="mt-10 pt-8 border-t border-white/5">
+                        <h3 className="text-[#FF003C] font-mono text-xs uppercase tracking-widest mb-6 flex items-center gap-2">
+                          <div className="relative">
+                            <span className="absolute inset-0 animate-ping opacity-75 rounded-full bg-[#FF003C]" />
+                            <Target size={16} className="relative z-10" />
+                          </div>
+                          Objectifs du projet
+                        </h3>
+                        <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          {project.goals.map((goal, i) => (
+                            <li key={i} className="flex items-start gap-3 bg-white/5 border border-white/5 p-3 rounded-lg hover:border-[#FF003C]/30 transition-colors duration-300">
+                              <div className="mt-1.5 w-1.5 h-1.5 bg-[#FF003C] rounded-sm shrink-0 shadow-[0_0_5px_#FF003C]" />
+                              <span className="text-neutral-200 text-sm font-light leading-relaxed">
+                                {goal}
+                              </span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
                   </div>
                 </div>
 
-                <div className="w-full lg:w-80 shrink-0">
-                  <div className="bg-neutral-900/40 border border-white/5 rounded-xl p-6 md:p-8 sticky top-6 backdrop-blur-sm">
+                {/* COLONNE DROITE : Fiche Technique (Agrandie) */}
+                {/* Changement ici : lg:w-96 au lieu de lg:w-80 */}
+                <div className="w-full lg:w-96 shrink-0">
+                  <div className="bg-neutral-900/40 border border-white/5 rounded-xl p-6 md:p-8 sticky top-6 backdrop-blur-sm shadow-2xl">
                     <h3 className="font-mono text-xs text-neutral-500 uppercase tracking-[0.2em] mb-6 flex items-center gap-2 border-b border-white/10 pb-4">
                       <Database size={14} /> Fiche Technique
                     </h3>
                     <div className="space-y-6">
-                      <div>
-                        <h4 className="text-white text-sm font-bold mb-1">ANNÉE</h4>
-                        <p className="text-neutral-400 text-sm font-mono">{project.year}</p>
-                      </div>
-                      {project.duration && (
+                      <div className="grid grid-cols-2 gap-4">
                         <div>
-                          <h4 className="text-white text-sm font-bold mb-1">DURÉE</h4>
-                          <p className="text-neutral-400 text-sm font-mono">{project.duration}</p>
+                            <h4 className="text-white text-sm font-bold mb-1">ANNÉE</h4>
+                            <p className="text-neutral-400 text-sm font-mono bg-black/30 p-2 rounded border border-white/5 inline-block w-full text-center">
+                                {project.year}
+                            </p>
+                        </div>
+                        {project.duration && (
+                            <div>
+                                <h4 className="text-white text-sm font-bold mb-1">DURÉE</h4>
+                                <p className="text-neutral-400 text-sm font-mono bg-black/30 p-2 rounded border border-white/5 inline-block w-full text-center">
+                                    {project.duration}
+                                </p>
+                            </div>
+                        )}
+                      </div>
+                      
+                      {project.client && (
+                        <div>
+                           <h4 className="text-white text-sm font-bold mb-1">CLIENT / TYPE</h4>
+                           <p className="text-neutral-400 text-sm font-mono">{project.client}</p>
                         </div>
                       )}
+
                       <div>
-                        <h4 className="text-white text-sm font-bold mb-3">STACK</h4>
+                        <h4 className="text-white text-sm font-bold mb-3">STACK TECHNIQUE</h4>
                         <div className="flex flex-wrap gap-2">
                           {project.tech && project.tech.map((t, i) => (
-                            <span key={i} className="px-2 py-1 bg-white/5 border border-white/10 rounded text-[10px] text-neutral-300 font-mono cursor-default">
+                            <span key={i} className="px-3 py-1.5 bg-[#00F0FF]/5 border border-[#00F0FF]/20 rounded text-xs text-[#00F0FF] font-mono cursor-default hover:bg-[#00F0FF]/10 transition-colors">
                               {t}
                             </span>
                           ))}
