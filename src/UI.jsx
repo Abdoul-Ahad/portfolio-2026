@@ -2199,21 +2199,19 @@ export const AboutPage = memo(({ setView }) => {
 
       <div className="max-w-7xl mx-auto px-4 md:px-8 py-20 relative z-20">
         
-        {/* SECTION 1 : MA VISION */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 md:gap-24 mb-32 border-b border-white/5 pb-20 items-center">
-          
-          {/* Colonne Texte */}
+        {/* SECTION 1 : MA VISION (Centrée, sans photo) */}
+        <div className="mb-32 border-b border-white/5 pb-20">
           <motion.div 
-            initial={{ opacity: 0, x: -20 }} 
-            whileInView={{ opacity: 1, x: 0 }} 
+            initial={{ opacity: 0, y: 20 }} 
+            whileInView={{ opacity: 1, y: 0 }} 
             viewport={{ once: true }} 
-            className="lg:col-span-7 space-y-8 order-2 lg:order-1"
+            className="max-w-4xl mx-auto flex flex-col items-center text-center"
           >
-            <h2 className="text-5xl md:text-7xl font-black text-white uppercase leading-tight tracking-tight">
+            <h2 className="text-5xl md:text-7xl font-black text-white uppercase leading-tight tracking-tight mb-12">
               MA <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00F0FF] to-[#FF003C]">VISION</span>
             </h2>
 
-            <div className="space-y-6 text-neutral-300 font-normal text-lg text-justify leading-relaxed">
+            <div className="space-y-8 text-neutral-300 font-normal text-lg md:text-xl leading-relaxed text-justify md:text-center">
                 <p>
                     Pour moi, le design est bien plus qu'une affaire d'esthétique, c'est un <strong className="text-white font-medium">langage universel</strong>. Je pense qu'un écran n'est pas qu'une simple surface à remplir, mais plutôt comme un espace d'expression où chaque détail doit capter l'attention et susciter une émotion immédiate.
                 </p>
@@ -2225,7 +2223,7 @@ export const AboutPage = memo(({ setView }) => {
                 </p>
             </div>
             
-            <div className="flex flex-wrap gap-4 pt-6">
+            <div className="flex flex-wrap gap-6 pt-12 justify-center">
               <NeonButton variant="red" onClick={handleContactClick}>
                 ME CONTACTER <Send size={18} />
               </NeonButton>
@@ -2233,30 +2231,6 @@ export const AboutPage = memo(({ setView }) => {
               <NeonButton variant="cyan" onClick={handleProjectsClick}>
                 PROJETS <ArrowRight size={18} />
               </NeonButton>
-            </div>
-          </motion.div>
-
-          {/* Colonne Image */}
-          <motion.div 
-            initial={{ opacity: 0, x: 20 }} 
-            whileInView={{ opacity: 1, x: 0 }} 
-            viewport={{ once: true }} 
-            className="lg:col-span-5 flex justify-center lg:justify-end order-1 lg:order-2 mb-8 lg:mb-0"
-          >
-            <div className="relative w-full max-w-sm aspect-[4/5] p-2">
-              <div className="absolute top-0 left-0 w-6 h-6 border-t-2 border-l-2 border-[#00F0FF]" />
-              <div className="absolute top-0 right-0 w-6 h-6 border-t-2 border-r-2 border-[#FF003C]" />
-              <div className="absolute bottom-0 left-0 w-6 h-6 border-b-2 border-l-2 border-[#FF003C]" />
-              <div className="absolute bottom-0 right-0 w-6 h-6 border-b-2 border-r-2 border-[#00F0FF]" />
-              
-              <div className="w-full h-full bg-neutral-900 border border-white/10 flex flex-col items-center justify-center relative overflow-hidden group">
-                <div className="absolute inset-0 flex flex-col items-center justify-center opacity-50 group-hover:opacity-80 transition-opacity">
-                  <User size={64} className="text-neutral-600 mb-4" />
-                  <span className="font-mono text-xs text-neutral-500 tracking-widest uppercase border border-neutral-700 px-3 py-1 rounded">
-                    INSERT PORTRAIT
-                  </span>
-                </div>
-              </div>
             </div>
           </motion.div>
         </div>
@@ -2490,7 +2464,7 @@ export const HomePage = memo(({ setView, onProjectClick }) => {
                 className="space-y-8"
               >
                 <p className="font-mono text-sm md:text-lg text-neutral-300 leading-relaxed max-w-2xl mx-auto lg:mx-0 text-center md:text-left">
-                  À 20 ans, je suis étudiant en BUT MMI à la Sorbonne. Passionné par le digital, je combine mes compétences en <strong>Graphisme</strong>, <strong>Motion Design</strong>, <strong>Montage Vidéo</strong> et en <strong>Web design</strong> avec une solide maîtrise du <strong>Développement Web</strong>.
+                  À 20 ans, je suis étudiant en BUT MMI à la Sorbonne Paris Nord. Passionné par le digital, je combine mes compétences en <strong>Graphisme</strong>, <strong>Motion Design</strong>, <strong>Montage Vidéo</strong> et en <strong>Web design</strong> avec une solide maîtrise du <strong>Développement Web</strong>.
                   <br className="block mt-4" />
                   Curieux et créatif, j'explore aujourd'hui la <strong>3D</strong> pour repousser mes limites. Mon objectif : utiliser cette polyvalence technique pour donner vie à des projets visuels uniques.
                 </p>

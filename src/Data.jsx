@@ -114,7 +114,13 @@ export const ALL_PROJECTS = [
         client: "None",
         year: "2024",
         duration: "1 Semaine",
-        description: "Série d'affiches et visuels promotionnels pour la gamme Air Max. Exploration de différents environnements (Espace, Sunset, Water) pour mettre en valeur le produit à travers des compositions dynamiques.",
+        description: "e projet universitaire, baptisé DunkSpot, est né du constat qu'il est souvent difficile pour les passionnés de basket de rue de localiser des terrains de qualité ou de trouver des partenaires de jeu. La mission était de concevoir l'interface (UI) et l'expérience utilisateur (UX) d'une plateforme web dédiée à la culture Streetball. Le brief imposait de créer un écosystème numérique complet permettant de géolocaliser des playgrounds avec précision, de consulter les avis de la communauté sur les infrastructures et d'organiser des rencontres sportives (1v1, 3v3, 5v5). L'identité visuelle devait refléter le dynamisme urbain, d'où le choix d'un Dark Mode contrasté par un rouge vif pour une immersion totale.",
+        goals: [
+        "Conception d'une interface utilisateur (UI) immersive adaptée aux codes du sport urbain",
+        "Optimisation du parcours utilisateur (UX) centré sur la géolocalisation et la recherche",
+        "Architecture de l'information pour des fonctionnalités sociales complexes",
+        "Création de systèmes d'interaction pour la gestion d'événements"
+        ],
         tech: ["Figma", "Indesign"],
         image: "/images/Page-ac.webp",
         gallery: [
@@ -132,7 +138,13 @@ export const ALL_PROJECTS = [
         client: "None",
         year: "2024",
         duration: "2 Semaines",
-        description: "Série d'affiches et visuels promotionnels pour la gamme Air Max. Exploration de différents environnements (Espace, Sunset, Water) pour mettre en valeur le produit à travers des compositions dynamiques.",
+        description: "Dans une volonté d'élargir mon champ de compétences vers le design produit et la création numérique, j'ai initié ce projet personnel sur le logiciel Blender. L'objectif était de concevoir et modéliser une chaussure, en partant de zéro (from scratch). Le défi principal résidait dans l'apprentissage du workflow 3D spécifique au Footwear, nécessitant de gérer des formes à la fois organiques et techniques. J'ai opté pour une direction artistique minimaliste et monochrome afin de concentrer l'attention sur l'étude des volumes, la silhouette de la chaussure et le jeu d'ombres, sans être distrait par la couleur.",
+        goals: [
+        "Apprentissage de la modélisation polyvalente",
+        "Optimisation du parcours utilisateur (UX) centré sur la géolocalisation et la rechercheGestion de l'éclairage de studio (Lighting) pour sculpter les formes en clair-obscur",
+        "Exploration du Shading (création de matériaux) pour différencier les textures",
+        "Mise en scène de l'objet dans un espace tridimensionnel"
+        ],
         tech: ["Blender"],
         image: "/images/Model-1.webp",
         gallery: [
@@ -149,7 +161,13 @@ export const ALL_PROJECTS = [
         client: "None",
         year: "2024",
         duration: "1 Semaine",
-        description: "Conception et mise en page d'un magazine d'art pour le musée du Louvre. L'objectif était de créer une identité visuelle élégante et moderne tout en respectant les codes classiques de l'institution. Travail sur la grille, la typographie et la hiérarchie visuelle.",
+        description: "Dans le cadre de ce projet universitaire axé sur le design éditorial, la mission était de concevoir la maquette d'un supplément magazine culturel fictif, reprenant les codes de Beaux Arts Magazine. Le sujet imposé était la grande rétrospective consacrée à Léonard de Vinci au Musée du Louvre. L'enjeu principal était de structurer un contenu textuel dense (biographie, analyse d'œuvres, programmation culturelle) à travers une mise en page aérée et lisible. Le brief exigeait une maîtrise parfaite de la grille de composition pour alterner harmonieusement entre des articles de fond sur fond clair et des sections plus immersives sur fond noir, tout en intégrant des éléments pratiques comme l'agenda de l'auditorium ou la boutique.",
+        goals: [
+        "Mise en page éditoriale et gestion de grilles de composition complexes",
+        "Hiérarchisation typographique stricte (gestion des niveaux de lecture : titres, chapeaux, légendes).",
+        "Création d'une identité visuelle Premium et institutionnelle adaptée au secteur de l'art",
+        "Structuration de l'information"
+        ],
         tech: ["InDesign", "Photoshop", "Figma"],
         image: "/images/Mag_page-1.webp",
         gallery: [
@@ -167,7 +185,13 @@ export const ALL_PROJECTS = [
         client: "None",
         year: "2025",
         duration: "3 Jours",
-        description: "Conception et mise en page d'un magazine d'art pour le musée du Louvre. L'objectif était de créer une identité visuelle élégante et moderne tout en respectant les codes classiques de l'institution. Travail sur la grille, la typographie et la hiérarchie visuelle.",
+        description: "Ce projet universitaire consistait à concevoir l'affiche promotionnelle pour les fêtes locales de la ville de Saint-Paul-lès-Dax. La demande portait sur la création d'un visuel grand public, chaleureux et impactant, capable de communiquer instantanément l'ambiance estivale de l'événement. J'ai pris le parti d'une réalisation entièrement illustrée en vectoriel, privilégiant une palette de couleurs nocturne et festive (dégradé crépusculaire) pour mettre en lumière les symboles clés de la fête : le feu d'artifice du 14 juillet, le chapiteau et le cadre naturel. Le défi principal était d'harmoniser ces éléments graphiques avec une typographie ludique tout en assurant une lisibilité parfaite des dates.",
+        goals: [
+        "Création d'illustration vectorielle (Flat Design) et gestion des aplats",
+        "Travail sur l'ambiance colorimétrique et les contrastes",
+        "Hiérarchisation des informations textuelles pour une lecture rapide",
+        "Composition équilibrée intégrant des éléments narratifs symboliques"
+        ],
         tech: ["Illustrator"],
         image: "/images/Affiche-saint-paul-les-daxs.webp",
     },
@@ -212,7 +236,7 @@ export const LOGOS_DATA = [
         node: <img src="https://upload.wikimedia.org/wikipedia/commons/c/cb/Adobe_After_Effects_CC_icon.svg" alt="After Effects" loading="lazy" className="w-full h-full object-contain" />, 
         title: "After Effects", 
         href: "#",
-        value: 65 // -> Aichera "CONFIRMÉ" (Cyan)
+        value: 20 // -> Aichera "CONFIRMÉ" (Cyan)
     },
     { 
         node: <img src="https://upload.wikimedia.org/wikipedia/commons/4/48/Adobe_InDesign_CC_icon.svg" alt="InDesign" loading="lazy" className="w-full h-full object-contain" />, 
