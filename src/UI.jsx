@@ -985,7 +985,7 @@ const RecruitmentBanner = memo(({ setView }) => {
           {/* PARTIE DROITE */}
           <div className="w-full lg:w-[420px] shrink-0 flex flex-col gap-6">
             
-            {/* Carte Stage */}
+            {/* Carte alternance */}
             <div className="flex-1 bg-white/5 border border-white/10 p-8 rounded-2xl hover:border-[#00F0FF]/50 transition-colors duration-300 group/card relative overflow-hidden w-full flex flex-col justify-between shadow-2xl min-h-[250px]">
               <div className="absolute inset-0 bg-gradient-to-r from-[#00F0FF]/0 via-[#00F0FF]/5 to-[#00F0FF]/0 translate-x-[-100%] group-hover/card:translate-x-[100%] transition-transform duration-1000" />
               <div className="relative z-10 flex flex-col h-full justify-between gap-8">
@@ -997,14 +997,14 @@ const RecruitmentBanner = memo(({ setView }) => {
                     <Briefcase size={28} />
                   </div>
                   <span className="text-sm font-mono font-bold text-[#00F0FF] border border-[#00F0FF]/20 px-3 py-1.5 rounded-lg bg-[#00F0FF]/5 tracking-wider">
-                    3 MOIS
+                    12 MOIS
                   </span>
                 </div>
                 <div className="space-y-2">
-                  <h3 className="text-white font-black uppercase tracking-tight text-4xl md:text-5xl">STAGE</h3>
+                  <h3 className="text-white font-black uppercase tracking-tight text-4xl md:text-5xl">Alternance</h3>
                   <div className="flex items-center gap-3 text-sm md:text-base text-neutral-300 font-mono uppercase">
                     <Calendar size={18} className="text-[#00F0FF]" />
-                    <span>DISPO : <span className="text-white font-bold">Avril 2026</span></span>
+                    <span>DISPO : <span className="text-white font-bold">Octobre 2026</span></span>
                   </div>
                 </div>
               </div>
