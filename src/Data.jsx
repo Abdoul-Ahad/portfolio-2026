@@ -258,7 +258,7 @@ export const LOGOS_DATA = [
         node: <img src="https://upload.wikimedia.org/wikipedia/commons/3/33/Figma-logo.svg" alt="Figma" loading="lazy" className="w-full h-full object-contain" />, 
         title: "Figma", 
         href: "#",
-        value: 95 // -> Aichera "EXPERT" (Rouge)
+        value: 80 // -> Aichera "EXPERT" (Rouge)
     },
     
     // Développement (Niveaux variés)
@@ -295,6 +295,13 @@ export const LOGOS_DATA = [
 ];
 
 export const TIMELINE_DATA = [
+    {
+    year: "2026",
+    title: "Stage - Infogreffe",
+    subtitle: "Graphiste & Motion Designer",
+    desc: "Stage de 4 mois, du 07 Avril au 07 Août 2026. Création de supports visuels, déclinaison d'identités graphiques et réalisation d'animations en motion design pour la communication institutionnelle et digitale.",
+    tech: ["Motion Design", "Graphisme", "After Effects", "Suite Adobe"]
+    },
     { 
       year: "2026", 
       title: "BUT MMI - 2ème Année", 

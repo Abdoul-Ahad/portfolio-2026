@@ -2235,7 +2235,7 @@ export const AboutPage = memo(({ setView }) => {
           </motion.div>
         </div>
 
-        {/* SECTION 2 : PARCOURS SCOLAIRE */}
+        {/* SECTION 2 : PARCOURS PROFESSIONNEL */}
         <div className="mb-40 max-w-6xl mx-auto relative z-20">
           <motion.div 
             initial={{ opacity: 0, y: 20 }} 
@@ -2244,10 +2244,10 @@ export const AboutPage = memo(({ setView }) => {
             className="text-center mb-20"
           >
             <span className="font-mono text-xs text-[#00F0FF] tracking-[0.3em] uppercase block mb-4">
-              /// ÉDUCATION
+              /// EXPÉRIENCES
             </span>
             <h2 className="text-4xl md:text-5xl font-black text-white uppercase">
-              Parcours <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00F0FF] to-[#FF003C]">Académique</span>
+              Parcours <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00F0FF] to-[#FF003C]">Professionnel</span>
             </h2>
           </motion.div>
           
